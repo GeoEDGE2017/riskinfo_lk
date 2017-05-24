@@ -1,0 +1,9 @@
+- hosts: production 
+  remote_user: vagrant 
+  vars:
+    app_name: riskinfo_lk
+    github_user: riskinfo-lk
+    server_name: 192.168.10.50
+    deploy_user: vagrant
+  roles:
+     - { role: ortelius.geonode }

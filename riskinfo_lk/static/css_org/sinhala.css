@@ -1,0 +1,51 @@
+.welcomebox {
+  background-color: white;
+  padding-left: 15px;
+  padding-right: 15px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  min-height: 533px;
+}
+
+.image-source{
+  font-size: 9px;
+  font-weight: bold;
+  color: black;
+  text-decoration: underline;
+  position: absolute;
+  bottom: -16px;
+  right: 2px;
+}
+
+.welcometext {
+  margin-top:20px;
+  text-align:justify;
+  font-size: 11px;
+}
+
+.minibox a {
+  font-size:12px;
+}
+
+.mapsbox {
+  min-height: 192px;
+}
+
+.databox {
+  min-height: 192px;
+}
+
+.main-actions a.btn-large {
+  font-size: 15px;
+}
+
+.btn-group>.btn-large {
+  font-size: 14px;
+}
+
+.boxtext {
+  font-size: 12px;
+}
+

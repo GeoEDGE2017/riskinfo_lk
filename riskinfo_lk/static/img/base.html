@@ -1,0 +1,642 @@
+{% load i18n avatar_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <title>Riskinfo</title>
+    {% block head %}
+      {% if DEBUG_STATIC %}
+      <link href="{{ STATIC_URL }}lib/css/jquery.dataTables.css?v={{ VERSION }}" rel="stylesheet" />
+      <link href="{{ STATIC_URL }}lib/css/select2.css?v={{ VERSION }}" rel="stylesheet"/>
+      <link href="{{ STATIC_URL }}lib/css/bootstrap.min.css?v={{ VERSION }}" rel="stylesheet"/>
+	
+      <link href="{{ STATIC_URL }}lib/css/jquery-ui.css?v={{ VERSION }}" rel="stylesheet"/>
+      <link href="{{ STATIC_URL }}lib/css/bootstrap-datetimepicker.css?v={{ VERSION }}" rel="stylesheet"/>
+      {% else %}
+      <link href="{{ STATIC_URL }}lib/css/assets.min.css?v={{ VERSION }}" rel="stylesheet"/>
+      {% endif %}
+	<!--link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet"/ -->
+      <link href="{{ STATIC_URL }}geonode/css/ext-compatibility.css?v={{ VERSION }}" rel="stylesheet" />
+      <link href="{{ STATIC_URL }}geonode/css/base.css?v={{ VERSION }}" rel="stylesheet" />
+      <style type="text/css">[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}</style>
+      {% block extra_head %}
+      {% endblock %}
+    {% endblock %}
+    <!--[if IE]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <style>
+        #ieflag{
+            display: block !important;
+            height: 150px;
+            text-align: center;
+        }
+
+      </style>
+    <![endif]-->
+
+<style>
+.footer-distributed{
+	background-color: #ffffff;
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+	box-sizing: border-box;
+	width: 100%;
+	text-align: left;
+	font: bold 16px sans-serif;
+
+	padding: 35px 50px;
+	margin-top: 0px;
+}
+a {cursor:pointer;}
+.footer-distributed .footer-left,
+.footer-distributed .footer-center,
+.footer-distributed .footer-right{
+	display: inline-block;
+	vertical-align: top;
+}
+
+/* Footer left */
+
+.footer-distributed .footer-left{
+	width: 40%;
+}
+
+/* The company logo */
+
+.footer-distributed h3{
+	color:  #ffffff;
+	font: normal 36px 'Cookie', cursive;
+	margin: 0;
+}
+
+.footer-distributed h3 span{
+	color:  #5383d3;
+}
+
+/* Footer links */
+
+.footer-distributed .footer-links{
+	color:  #ffffff;
+	margin: 10px 0 12px;
+	padding: 0;
+}
+
+.footer-distributed .footer-links a{
+	display:inline-block;
+	line-height: 1.8;
+	text-decoration: none;
+	color:  inherit;
+}
+
+.footer-distributed .footer-company-name{
+	color:  #8f9296;
+	font-size: 14px;
+	font-weight: normal;
+	margin: 0;
+}
+
+/* Footer Center */
+
+.footer-distributed .footer-center{
+	width: 35%;
+}
+
+.footer-distributed .footer-center i{
+	background-color:  #33383b;
+	color: #ffffff;
+	font-size: 25px;
+	width: 38px;
+	height: 38px;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 42px;
+	margin: 10px 15px;
+	vertical-align: middle;
+}
+
+.footer-distributed .footer-center i.fa-envelope{
+	font-size: 17px;
+	line-height: 38px;
+}
+
+.footer-distributed .footer-center p{
+	display: inline-block;
+	color: #ffffff;
+	vertical-align: middle;
+	margin:0;
+}
+
+.footer-distributed .footer-center p span{
+	display:block;
+	font-weight: normal;
+	font-size:14px;
+	line-height:2;
+}
+
+.footer-distributed .footer-center p a{
+	color:  #5383d3;
+	text-decoration: none;;
+}
+
+
+/* Footer Right */
+
+.footer-distributed .footer-right{
+	width: 20%;
+}
+
+.footer-distributed .footer-company-about{
+	line-height: 20px;
+	color:  #92999f;
+	font-size: 13px;
+	font-weight: normal;
+	margin: 0;
+}
+
+.footer-distributed .footer-company-about span{
+	display: block;
+	color:  #ffffff;
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.footer-distributed .footer-icons{
+	margin-top: 25px;
+}
+
+.footer-distributed .footer-icons a{
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	cursor: pointer;
+	background-color:  #33383b;
+	border-radius: 2px;
+
+	font-size: 20px;
+	color: #ffffff;
+	text-align: center;
+	line-height: 35px;
+
+	margin-right: 3px;
+	margin-bottom: 5px;
+}
+
+/* If you don't want the footer to be responsive, remove these media queries */
+
+@media (max-width: 880px) {
+
+	.footer-distributed{
+		font: bold 14px sans-serif;
+	}
+
+	.footer-distributed .footer-left,
+	.footer-distributed .footer-center,
+	.footer-distributed .footer-right{
+		display: block;
+		width: 100%;
+		margin-bottom: 40px;
+		text-align: center;
+	}
+
+	.footer-distributed .footer-center i{
+		margin-left: 0;
+	}
+
+}
+}
+.select-style {
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    width: 120px;
+    border-radius: 3px;
+   
+    background-color: #fff;
+
+    background: #fff url("../static/img/arrowdown.png") no-repeat 90% 50%;
+}
+
+.select-style select {
+    
+    width: 50%;
+    border: 1px solid #333333;
+    box-shadow: none;
+    background-color: transparent;
+    background-image: none;
+background-color: #242424;
+color:#fff;
+cursor:pointer;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+}
+
+.select-style select:focus {
+    outline: none;
+}
+.img-container { background-color: #000000; }
+            .img-container img { opacity: 0.7; }
+@media (max-width: 458px) {
+  #btr {
+   text-align:center;
+   }
+   .select-style {text-align:center;width:100%;}
+  }
+
+</style>
+
+<style>
+/* MARKETING CONTENT
+-------------------------------------------------- */
+
+/* Center align the text within the three columns below the carousel */
+.marketing .col-lg-3 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+.marketing h2 {
+  font-weight: normal;
+}
+.marketing .col-lg-3 p {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.callout-light {
+    padding: 30px;
+
+	color: #000;
+	background-color: #ccc;
+}
+
+.callout-light h1,
+h2
+ {
+	font-weight: 300;
+	line-height: 1.4;
+}
+
+.image {
+    position:relative;
+    width:100px;
+    height:100px;
+}
+.image img {
+    width:100px;
+    vertical-align:top;
+}
+.image:after {
+    content:'\A';
+    position:absolute;
+    width:100px; height:100px;
+    top:0; left:0;
+    background:rgba(0,0,0,0.6);
+    opacity:0;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+border-radius:50%;
+}
+.image:hover:after {
+    opacity:1;
+border-radius:50%;
+}
+
+@media (max-width: 458px) {
+  
+   .callout-light {
+    padding: 0px;
+
+}
+  }
+</style>
+
+
+    <link rel="search" type="application/opensearchdescription+xml" href="/catalogue/opensearch" title="GeoNode Search"/>
+  </head>
+  
+  <body class="{% block body_class %}{% endblock %}" style="padding-top:0;background:#ffffff;" onload="initialize()">
+<div style="background:#242424;height:auto;overflow:hidden;">
+<div class="row">
+<div class="container">
+<div class="col-md-8">
+ <img alt="" src="../../static/img/RiskInfo_Logo.png" style="width:80%;padding-top:20px;padding-bottom:20px;">
+</div>
+<div class="col-md-4">
+ 
+          <div class="col-md-12">
+<div class="select-style">
+            <label class="hidden">{% trans "Language" %}</label>
+            {% if csrf_token != "NOTPROVIDED" %}
+            {% get_current_language as LANGUAGE %}
+            <form class="form-inline" action="/i18n/setlang/" method="post" style="padding-top:25px;padding-bottom:20px;">
+            {% csrf_token %}
+              <select class="col-md-6 pull-right" name="language" onchange="javascript:form.submit()" >
+                {% for lang in LANGUAGES %}
+                <option value="{{ lang.0 }}" {% ifequal LANGUAGE_CODE lang.0 %} selected="selected"{% endifequal %}>
+                  {{ lang.1 }}
+                </option>
+                {% endfor %}
+              </select>
+            </form>
+            {% endif %}
+</div>
+</div>
+</div>
+</div>
+</div>
+    {% block header %}
+    <nav class="navbar navbar-inverse" >
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!--a class="navbar-brand" href="{% url "home" %}">GeoNode</a-->
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            {% block tabs %}
+ 		<li id="Home">
+              <a href="{% url "home" %}">{% trans "Home" %}</a>
+            </li>
+            <li id="nav_layers">
+              <a href="{% url "layer_browse" %}">{% trans "Layers" %}</a>
+            </li>
+            <li id="nav_maps">
+              <a href="{% url "maps_browse" %}">{% trans "Maps" %}</a>
+            </li>
+            <li id="nav_documents">
+              <a href="{% url "document_browse" %}">{% trans "Documents" %}</a>
+            </li>
+           {% block extra_tab %}
+           {% endblock %}
+            <li id="nav_people">
+              <a href="{% url "profile_browse" %}">{% trans "People" %}</a>
+            </li>
+            <li id="nav_groups">
+              <a href="{% url "group_list" %}">{% trans "Groups" %}</a>
+            </li>
+            {% endblock %}
+          </ul>
+          {% trans "Search" as search_text %}
+          <form class="navbar-form" id="search" action="{% url "search" %}" >
+            <div class="col-md-3">
+              <div class="input-group">
+                {% if HAYSTACK_SEARCH %}
+                <input id="search_input" type="text" placeholder="{{ search_text }}" class="form-control" name="q">
+                {% else %}
+                <input id="search_input" type="text" placeholder="{{ search_text }}" class="form-control" name="title__icontains">
+                {% endif %}
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                </span>
+              </div>
+            </div>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            {% if not user.is_authenticated and REGISTRATION_OPEN %}
+            <li><a href="{% url "account_signup" %}">{% trans "Register" %}</a></li>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <li>
+              <a href="#" data-toggle="modal" data-target="#UserModal" role="button" aria-expanded="false">
+                {% avatar user 30 %} {{ user.username }}
+              </a>
+            </li>
+            {% else %}
+            <li>
+              <a href="#" data-toggle="modal" data-target="#SigninModal" role="button" >
+                {% trans "Sign in" %} 
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    {% endblock header %}
+
+    <div class="alert alert-danger alert-dismissible" role="alert" id="ieflag" style="display:none">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h1>You are using an outdated browser that is not supported by GeoNode.</h1>
+      <p>Please use a modern browser like Mozilla Firefox, Google Chrome or Safari.</p>
+    </div>
+
+  <div id="wrap" style="padding-bottom:0;padding-top:0;">
+    {% block middle %}
+    <div class="container">
+      {% include "_status_message.html" %}
+      {% include "_announcements.html" %}
+      {% include "_messages.html" %}
+      {% block body_outer %}
+      <div class="row">
+        <div class="col-md-8">
+        {% block body %}{% endblock %}
+        </div>
+        <div class="col-md-4">
+        {% block sidebar %}{% endblock %}
+        </div>
+      </div>
+      {% endblock %}
+    </div>
+    {% endblock middle %}
+  </div>
+    
+   {% block footer %}
+   <footer class="footer-distributed" style="color:#242424;">
+
+			<div class="footer-left">
+
+				<h4>Implementation partners</h4>
+				
+
+
+
+	<br> <a href="http://www.dmc.gov.lk/"><img style="height:40px;margin-right:5px;" src="../static/img/DMC_Logo.png" alt="f"></a>
+            <a href="http://www.worldbank.org/"><img style="height:40px;" src="../static/img/WBG_Vertical-CMYK.jpg" alt="f"></a>
+          
+        
+
+				
+			</div>
+
+			<div class="footer-center">
+				<h4>Data sponsors</h4>
+			<br> <a href="http://www.lk.undp.org/"><img style="height:40px;margin-right:5px;" src="../static/img/UNDPFINAL1-01.jpg" alt="f" ></a>
+            <a href="https://www.gfdrr.org/"><img style="height:40px;" src="../static/img/GFDRR_PrimaryLogo_BW-Shade.jpg" alt="f"></a>
+ <a href="http://www.survey.gov.lk/"><img style="height:40px;" src="../static/img/Logo_Color_E.jpg" alt="f"></a>
+           
+
+			</div>
+
+			<div class="footer-right">
+			<h4>Contact us</h4>
+				
+			 <h5>Feedback?  Contact us at <a href="mailto:riskinfo@dmc.gov.lk">riskinfo@dmc.gov.lk</a></h5>
+            <div class="social">
+              
+               <a href="#"><i class="fa fa-lg fa-facebook"></i></a>
+               <a href="#"><i class="fa fa-lg fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-lg fa-google-plus"></i></a>
+                <a href="#"><i class="fa fa-lg fa-github"></i></a>
+             	
+
+			</div>
+
+		</footer>
+<div style="background:#000;">
+<div class="container">
+<div class="col-md-8">
+<p style="color:#fff;margin-top:10px;"> Powered by <a href="http://geonode.org">GeoNode</a> <em>version 2.4.1</em> |
+            <a href="/developer/">Developers</a> |
+            <a href="/about/">About</a> </p>
+</div>
+<div class="col-md-4">
+<p style="color:#fff;margin-top:10px;float:right;">Developed by <a href="http://geoedge.lk/" target="_blank">GeoEDGE </a>
+</div>
+</div>
+</div>
+    {% endblock footer %}
+
+    <!-- Modal must stay outside the navbar -->
+    {% if not user.is_authenticated %}
+    <div class="modal fade" id="SigninModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">{% trans "Sign in" %}</h4>
+          </div>
+          <form class="form-signin" role="form" action="{% url "account_login" %}?next={{ request.path }}" method="post">
+            <div class="modal-body">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="id_username" class="sr-only">{% trans "Username" %}:</label>
+                <input id="id_username" class="form-control" name="username" placeholder="{% trans "Username" %}" type="text" />
+              </div>
+              <div class="form-group">
+                <label for="id_password" class="sr-only">{% trans "Password" %}:</label>
+                <input id="id_password" class="form-control" name="password" placeholder="{% trans "Password" %}" type="password" />
+              </div>
+              <label class="checkbox">
+                <input type="checkbox" /> {% trans "Remember Me" %}
+              </label>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary btn-block">{% trans "Sign in" %}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="modal fade" id="UserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">{% trans "Menu" %}</h4>
+          </div>
+          <div class="modal-body">
+            <ul class="list-unstyled">
+              <li><a href="{% url "layer_upload" %}"><i class="fa fa-cloud-upload"></i> {% trans "Upload Layers" %}</a></li>
+              <li class="modal-divider"></li>
+              <li><a href="{{ user.get_absolute_url }}"><i class="fa fa-user"></i> {% trans "Profile" %}</a></li>
+              <li><a href="{% url "recent-activity" %}"><i class="fa fa-fire"></i> {% trans "Recent Activity" %}</a></li>
+              <li><a href="{% url "messages_inbox" %}"><i class="fa fa-inbox"></i> {% trans "Inbox" %}</a></li>
+              {% if USE_NOTIFICATIONS %}
+                <li><a href="{% url "notification_notice_settings" %}"><i class="fa fa-bell"></i> {% trans "Notifications" %}</a></li>
+              {% endif %}
+              {% if perms.announcements.can_manage %}
+              <li><a href="{% url "announcements_list" %}"><i class="fa fa-bullhorn"></i> {% trans "Announcements" %}</a></li>
+              {% endif %}
+              {% if user.is_superuser %}
+              <li><a href="{% url "services" %}"><i class="fa fa-globe"></i> {% trans "Remote Services" %}</a></li>
+              <li><a href="{% url "account_invite_user" %}"><i class="fa fa-edit"></i> {% trans "Invite User" %}</a></li>
+              <li class="modal-divider"></li>
+              <li><a href="{{ GEOSERVER_BASE_URL }}"><i class="fa fa-gears"></i> {% trans "GeoServer" %}</a></li>
+              {% endif %}
+              {% if user.is_staff %}
+              <li><a href="{% url "admin:index" %}"><i class="fa fa-cog"></i> {% trans "Admin" %}</a></li>
+              {% endif %}
+              {% block extra_user_menu %}
+              {% endblock %}
+              <li class="modal-divider"></li>
+              <li><a title="Help" rel="tooltip" href="{% url "help" %}"><i class="fa fa-question-circle"></i> {% trans "Help" %}</a></li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <form action="{% url "account_logout" %}" id="logout_form" method="post">
+              {% csrf_token %}
+              <a class="btn btn-warning btn-block" href="javascript:{}" onclick="document.getElementById('logout_form').submit();">{% trans "Log out" %}</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <!-- End of Modal -->
+    
+    {% if DEBUG_STATIC %}
+    <script src="{{ STATIC_URL }}lib/js/jquery.min.js?v={{ VERSION }}"></script>
+    <script src="{{ STATIC_URL }}lib/js/jquery.dataTables.js?v={{ VERSION }}"></script>
+    <script src="{{ STATIC_URL }}lib/js/jquery.timeago.js?v={{ VERSION }}"></script>
+    <script src="{{ STATIC_URL }}lib/js/jquery.ajaxprogress.js?v={{ VERSION }}"></script>
+    <script src="{{ STATIC_URL }}lib/js/jquery.ajaxQueue.js?v={{ VERSION }}"></script>
+    <script src="{{ STATIC_URL }}lib/js/jquery-ui.custom.js?v={{ VERSION }}"></script>
+    <script src="{{ STATIC_URL }}lib/js/jquery.raty.js?v={{ VERSION }}"></script>
+    <script src="{{ STATIC_URL }}lib/js/bootstrap.min.js?v={{ VERSION }}"></script>
+    <script src="{{ STATIC_URL }}lib/js/moment-with-locales.min.js?v={{ VERSION }}"></script>
+    <script src="{{ STATIC_URL }}lib/js/bootstrap-datetimepicker.min.js?v={{ VERSION }}"></script>
+    <script src="{{ STATIC_URL }}lib/js/json2.js?v={{ VERSION }}"></script>
+    <script src="{{ STATIC_URL }}lib/js/select2.js?v={{ VERSION }}"></script>
+    <script src="{{ STATIC_URL }}lib/js/waypoints.js?v={{ VERSION }}"></script>
+    {% else %}
+    <script src="{{ STATIC_URL }}lib/js/assets.min.js?v={{ VERSION }}"></script>
+    {% endif %}
+    <script src="{{ STATIC_URL }}geonode/js/utils/utils.js?v={{ VERSION }}"></script>
+    <script src="{{ STATIC_URL }}geonode/js/base/base.js?v={{ VERSION }}"></script>
+    {% include 'autocomplete_light/static.html' %}
+    <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
+    {% block extra_script %}{% endblock extra_script %}
+    <script type="text/javascript">
+        var autocomplete = $('#search_input').yourlabsAutocomplete({
+            url: '{% url "autocomplete_light_autocomplete" "ResourceBaseAutocomplete" %}',
+            choiceSelector: 'span',
+            hideAfter: 200,
+            minimumCharacters: 1,
+            placeholder: '{% trans 'Type your search here ...' %}',
+            appendAutocomplete: $('#search_input'),
+            autoHilightFirst: false
+        });
+        $('#search_input').bind('selectChoice', function(e, choice, autocomplete) {
+            if(choice[0].children[0] == undefined) {
+                $('#search_input').val($(choice[0]).text());
+                $('#search').submit();
+            }
+        });
+    </script>
+    <script>
+        // Workaround to fix the autocomplete box positions
+        yourlabs.Autocomplete.prototype.fixPosition = function(html) {
+            this.input.parents().filter(function() {
+                return $(this).css('overflow') === 'hidden';
+            }).first().css('overflow', 'visible');
+            if(this.input.attr('name') !== 'resource-keywords'){
+              this.box.insertAfter(this.input).css({top: 0, left: 0});
+            }else{
+              var pos = $.extend({}, this.input.position(), {
+                height: this.input.outerHeight()
+              });
+              this.box.insertAfter(this.input).css({top: pos.top + pos.height, left: pos.left});
+            }
+        };
+    </script>
+    <script type="text/javascript" src="{% url "lang" %}"></script>
+
+  </body>
+</html>

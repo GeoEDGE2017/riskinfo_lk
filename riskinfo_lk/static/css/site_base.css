@@ -1,0 +1,266 @@
+.home {
+    background: #17375e;
+ }
+
+ .explore {
+    padding-bottom: 100px;
+ }
+
+.navbar .navbar-inner {
+	background: #17375e;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.nav-top {
+    padding-top: 8px;
+    padding-bottom: 8px
+}
+
+.languages {
+  display: inline;
+}
+
+.language {
+  background-color: transparent;
+  border-style: none;
+  cursor: pointer;
+  color: #41aaba;
+  text-decoration: none;
+  font-family:Lato, sans-serif;
+  padding: 3.5px 15px 3.5px;
+}
+
+.language:hover {
+  color: #2d7681;
+  text-decoration: underline;
+}
+
+.content-wrap {
+    margin-top: 12px;
+}
+
+.hero-unit {
+    font-size:15px;
+    line-height: 21px;
+}
+
+
+.orange-light{
+ background-color: #fdeada;
+}
+
+.orange-dark{
+background-color: #fcd5b5;
+}
+
+.blue-dark {
+  background-color: #b9cde5;
+}
+
+.blue-light{
+  background-color: #dce6f2;
+}
+
+.welcomebox {
+  background-color: white;
+  padding-left: 15px;
+  padding-right: 15px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  min-height: 533px;
+}
+
+.image-container{
+  position: relative;
+}
+
+.image-source{
+  font-size: 9px;
+  font-weight: bold;
+  color: black;
+  text-decoration: underline;
+  position: absolute;
+  bottom: -16px;
+  right: 2px;
+}
+
+.welcomebox img {
+  max-width: 100%
+}
+
+.welcometext {
+  margin-top:20px;
+  text-align:justify;
+}
+
+.welcometext.sinhala {
+  font-size: 11px;
+}
+
+.searchbox {
+  background-color: #fff;
+  height: 54px;
+  margin-bottom: 5px;
+  padding: 6px;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/*input[type=text] {height: 200px;}
++input[type=submit] {height: 78px;}*/
+
+.searchbox-title {
+    display:inline-block;
+}
+
+
+.searchbox-input {
+    margin-left: 20px;
+    height: 30px;
+    text-align: left;
+}
+
+.boxtitle {
+  color: white;
+  float: left;
+  margin-top: 15px;
+}
+
+.boxtext {
+  text-align:justify;
+  clear: right;
+  margin-top: 98px;
+}
+
+.boxtext a {
+  text-decoration: underline;
+  color: black;
+}
+
+.boximage {
+  float: right; 
+  margin-top:15px;
+  margin-bottom: 15px;
+}
+
+.boxform {
+  padding-top: 15px;
+  margin: auto 0px;
+}
+
+.boxinput {
+  float:left;
+  margin-top:10px;
+}
+
+.boxbutton {
+  float: right; 
+  position: relative; 
+  right:10px;
+}
+
+.mapsbox {
+  background-color: #e46c0a;
+  min-height: 189px;
+  padding-left: 15px;
+  padding-right: 15px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.databox {
+  background-color: #558ed5;
+  padding-left: 15px;
+  padding-right: 15px;
+  min-height: 189px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.minibox {
+  padding:10px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  text-align: right;
+  min-height: 147px;
+  margin-top: 5px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.minibox > img {
+  margin-top: -10px;
+  margin-left: -10px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid gray;
+}
+
+.minibox > a {
+  color: black;
+  text-decoration: none;
+  padding-left: 5px;
+}
+
+.minibox:hover {
+  opacity: 0.9;
+  border: 2px solid black;
+  padding: 8px;
+
+}
+
+footer.footer {
+	height: 72px;
+	background: #17375e;
+  white-space: nowrap;
+  padding-top: 5px;
+}
+
+footer.footer img {
+    margin-left: 12px;
+  }
+
+footer .footercontent {
+	width:71%;
+	margin: 0 auto;
+	border-top: 1px solid white;
+  padding-top: 7px;
+}
+
+footer.footer .separator {
+	border-left:1px solid #fff;
+	height:54px; 
+	float:left; 
+	margin-left:12px; 
+	margin-right:10px;
+}
+
+footer.footer a {
+	color: #31AEEE;
+}
+
+.hero-unit {
+  margin-bottom: 0;
+}
+
+section.widget h2 {
+background: #a7e4ee;
+color: #353535;
+}
+
+.navbar .nav.pull-right {
+white-space: nowrap;
+  }
+
